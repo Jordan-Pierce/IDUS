@@ -91,3 +91,5 @@ The hdf5 file and CSV file we used are shared in the dataset.zip file.
 To train the IDUS, need to perform the .py files in the following order:
 init_texton.py->init_wavelet.py->init_combine.py->init_pseudo_mask.py->train.py
 The pathnames at the top of the main functions need to be revised appropriately so that to use the files needed for the .py files.
+
+### [Goolge Colab](https://colab.research.google.com/drive/16ArR45KoEWZjCPzAzyMR0z7ZmZ7ISg7C?usp=sharing)
