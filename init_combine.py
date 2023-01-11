@@ -3,19 +3,19 @@ import cv2
 
 if __name__ == '__main__':
 
-    """
-    This script concatenates wavelet and deep texton features, resizing them to the given size and saving the resulting features and names to the specified paths.
-    """
+    """This script concatenates wavelet and deep texton features, resizing 
+    them to the given size and saving the resulting features and names to 
+    the specified paths. """
     
     # paths to wavelet and deep texton features and names
-    wavelet = '/home/yungchen/idus_code/results/wavelet_features.npy'
-    wavelet_names = '/home/yungchen/idus_code/results/wavelet_names.npy'
-    deep_feature = '/home/yungchen/idus_code/results/deep_texton.npy'
-    deep_feature_name = '/home/yungchen/idus_code/results/deep_texton_names.npy'
+    wavelet = './results/wavelet_features.npy'
+    wavelet_names = './results/wavelet_names.npy'
+    deep_feature = './results/deep_texton.npy'
+    deep_feature_name = './results/deep_texton_names.npy'
 
     # path to save concatenated features and names
-    save_path = '/home/yungchen/idus_code/results/wavelet_deep_texton.npy'
-    name_path = '/home/yungchen/idus_code/results/wavelet_deep_texton_names.npy'
+    save_path = './results/wavelet_deep_texton.npy'
+    name_path = './results/wavelet_deep_texton_names.npy'
 
     # size to resize features to
     size = 256

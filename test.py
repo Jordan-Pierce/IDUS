@@ -21,57 +21,60 @@ best_m = 0
 # Define function to re-sort confusion matrix
 def re_sort(cfm, arr, columns):
 
-	# Check if array is at least length 7
-	if len(arr) >= 7:
-	# Calculate mean of diagonal of confusion matrix
-	mean = np.mean(np.diag(cfm[:,arr]))
-	
-	# Set global best mean value and confusion matrix
-	global best_m
-	global best_cfm
-	
-	if mean >= best_m:
-		best_m = mean
-		best_cfm = cfm[:,arr]
+    # Check if array is at least length 7
+    if len(arr) >= 7:
+    # Calculate mean of diagonal of confusion matrix
+    mean = np.mean(np.diag(cfm[:,arr]))
+
+    # Set global best mean value and confusion matrix
+    global best_m
+    global best_cfm
+
+    if mean >= best_m:
+        best_m = mean
+        best_cfm = cfm[:,arr]
 
     # Return from function
     return
 
-	# Iterate over columns
-	for i in range(len(columns)):
-	    # Append column to array
-	    arr.append(columns[i])
-	    # Call function with updated array and columns
-	    re_sort(cfm, arr, columns[0:i] + columns[i+1:len(columns)])
-	    # Pop column from array
-	    arr.pop()
+    # Iterate over columns
+    for i in range(len(columns)):
+        # Append column to array
+        arr.append(columns[i])
+        # Call function with updated array and columns
+        re_sort(cfm, arr, columns[0:i] + columns[i+1:len(columns)])
+        # Pop column from array
+        arr.pop()
 
 
-if name == 'main':
-	
-	# Set paths for data, patches, and model
-	data_path = '/cvdata/yungchen/supervised_sonar_segentation/used_data/sonar_512x512.hdf5'
-	patches_path = '/cvdata/yungchen/supervised_sonar_segentation/used_data/patches_all.csv'
-	net_path = '/home/yungchen/idus_code/models/idus.pth'
-	save_path = '/home/yungchen/idus_code/results/idus_cfm.npy'
+if __name__ == '__main__':
 
-	# Extract features from patches using provided function
-	features, names = extract_features(patches_path, data_path, if_softmax = True, net_path = net_path)
+    # Set paths for data, patches, and model
+    data_path = './dataset/sonar_512x512.hdf5'
+    patches_path = './dataset/patches_all.csv'
+    net_path = './models/idus.pth'
+    save_path = './results/idus_cfm.npy'
 
-	# Get predictions from features
-	preds = np.argmax(np.asarray(features['softmax']), axis=3)
+    # Extract features from patches using provided function
+    features, names = extract_features(patches_path,
+									   data_path,
+									   if_softmax=True,
+									   net_path=net_path)
 
-	# Get ground truth values from data
-	gts = np.asarray([ get_from_hdf5(data_path,name,'label') for name in names ])
+    # Get predictions from features
+    preds = np.argmax(np.asarray(features['softmax']), axis=3)
 
-	# Calculate confusion matrix
-	cfm = confusion_matrix_parallel(gts, preds, 7, 7)
+    # Get ground truth values from data
+    gts = np.asarray([ get_from_hdf5(data_path,name,'label') for name in names ])
 
-	# Re-sort confusion matrix
-	re_sort(cfm, [], columns)
+    # Calculate confusion matrix
+    cfm = confusion_matrix_parallel(gts, preds, 7, 7)
 
-	# Save the confusion matrix as a npy array
-	np.save(save_path, best_cfm)
+    # Re-sort confusion matrix
+    re_sort(cfm, [], columns)
 
-	# Print the confusion matrix
-	print(best_cfm)
+    # Save the confusion matrix as a npy array
+    np.save(save_path, best_cfm)
+
+    # Print the confusion matrix
+    print(best_cfm)
