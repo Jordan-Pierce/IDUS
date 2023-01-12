@@ -3,10 +3,12 @@ import cv2
 
 if __name__ == '__main__':
 
-    """This script concatenates wavelet and deep texton features, resizing 
+    """
+    This script concatenates wavelet and deep texton features, resizing 
     them to the given size and saving the resulting features and names to 
-    the specified paths. """
-    
+    the specified paths. 
+    """
+
     # paths to wavelet and deep texton features and names
     wavelet = './results/wavelet_features.npy'
     wavelet_names = './results/wavelet_names.npy'
@@ -29,8 +31,8 @@ if __name__ == '__main__':
     d_names = np.load(deep_feature_name)
 
     # create dictionaries of wavelet and deep texton features
-    w = dict(zip(w_names,wv))
-    d = dict(zip(d_names,df))
+    w = dict(zip(w_names, wv))
+    d = dict(zip(d_names, df))
 
     # initialize lists for concatenated features and names
     wavelet_deep = []
@@ -38,15 +40,19 @@ if __name__ == '__main__':
 
     # loop through wavelet features
     for key, value in w.items():
+
         # retrieve corresponding deep texton feature
-        df_value = cv2.resize(d[key],(size,size),interpolation=cv2.INTER_LINEAR)
+        df_value = cv2.resize(d[key], (size, size), interpolation=cv2.INTER_LINEAR)
         # resize wavelet feature to specified size
-        value = cv2.resize(value,(size,size), interpolation=cv2.INTER_LINEAR)
+        value = cv2.resize(value, (size, size), interpolation=cv2.INTER_LINEAR)
         # concatenate wavelet and deep texton features
-        wavelet_deep.append(np.concatenate((value,df_value), axis=2))
+        wavelet_deep.append(np.concatenate((value, df_value), axis=2))
         # add image name to list
         wavelet_deep_names.append(key)
 
+        # NOTE: Something is happening here in CoLab that makes the loop
+        # stop early without any error? The following lines are not ran...
+
     # save concatenated features and names
-    np.save(save_path,np.asarray(wavelet_deep).astype('float32'))
-    np.save(name_path,np.asarray(wavelet_deep_names))
+    np.save(save_path, np.asarray(wavelet_deep).astype('float32'))
+    np.save(name_path, np.asarray(wavelet_deep_names))

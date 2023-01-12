@@ -13,19 +13,7 @@ if __name__ == '__main__':
     compute global textons, and then uses the global textons to compute 
     local textons. The final output is a list of deep texton features and 
     their corresponding names. 
-
-    Args:
-    patches_path (str): path to the patches csv file
-    data_path (str): path to the image data hdf5 file
-    ly_names (list): list of names of layers to extract features from
-    cb_settings (list): list of settings for the convolutional blocks
-    local_texton_num (int): number of local textons to compute
-    global_texton_num (int): number of global textons to compute
-    sld_winsize (int): size of the sliding window for computing global textons
-    target_size (int): target size for rescaling the extracted features
-
-    Returns: tuple: a tuple containing the list of deep texton features and 
-    their corresponding names """
+    """
 
     start = time()
     
@@ -35,6 +23,7 @@ if __name__ == '__main__':
     save_path = './results/deep_texton.npy'
     names_path = './results/deep_texton_names.npy'
 
+    # ?
     # net_path = None
 
     # settings for extract layer features
@@ -61,7 +50,7 @@ if __name__ == '__main__':
                                          target_size=target_size)
 
     # save names and feature vectors to npy files
-    np.save(save_path,probs)
+    np.save(save_path, probs)
     np.save(names_path, np.asarray(names))
 
     print(time()-start)

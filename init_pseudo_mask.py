@@ -10,18 +10,21 @@ np.set_printoptions(linewidth=400)
 
 if __name__ == '__main__':
 
-    """This code is used to segment sonar images using deep learning 
-    features and wavelet transform. """
+    """
+    This code is used to segment sonar images using deep learning 
+    features and wavelet transform. 
+    """
 
     # path to the data file
     data_path = './dataset/sonar_512x512.hdf5'
     # number of clusters for segmentation
+    # NOTE: 7 is the number of class categories from the IDUS paper.
     n_clusters = 7
 
-    # parameters for deep wavelet texton features
+    # parameters for deep wavelet texton features wavelet_deep_texton
     deep_wavelet_texton_params = {
-        'feature_path': './results/features/deep feature/wavelet_deep_texton.npy',
-        'names_path': './results/features/deep feature/wavelet_deep_texton_names.npy',
+        'feature_path': './results/wavelet_deep_texton.npy',
+        'names_path': './results/wavelet_deep_texton_names.npy',
         'n_segments': 100,
         'compactness': 0.25,
         'seg_comp': 16,
@@ -73,7 +76,6 @@ if __name__ == '__main__':
             # save segmentation masks if specified
             if 'mask_path' in params:
                 np.save(params['mask_path'], preds)
-
 
         except:
             # print failed iteration number

@@ -62,6 +62,7 @@ def train_one_epoch(dataset, n_classes, max_epoch, save_path,
     save_path: The path where the trained model should be saved
     train_encoder_epoch: The number of epochs to train the encoder for (default 150)
     """
+
     # load network
     net = UNet_Resnet18(n_channels=1,
                         n_classes=n_classes,
@@ -172,7 +173,7 @@ if __name__ == '__main__':
     # Define paths for input data, model names, and the directory where the
     # trained model will be saved
     data_path = './dataset/sonar_512x512.hdf5'
-    names_path = './results/features/deep feature/wavelet_deep_texton_names.npy'
+    names_path = './wavelet_deep_texton_names.npy'
     pseudo_path = './results/pseudo_mask.npy'
     save_path = './models/'
 

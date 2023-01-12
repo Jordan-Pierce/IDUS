@@ -3,6 +3,8 @@ import torch.nn as nn
 import segmentation_models_pytorch as smp
 import torch
 
+# NOTE: Removed head_kernel as that's not a valid parameter from the codebase?
+# Could be a custom model / implementation, not sure. Ask IG.
 class UNet_Resnet18(nn.Module):
     def __init__(self, n_channels,n_classes,encoder_name='resnet18', encoder_weights=None):
         super(UNet_Resnet18, self).__init__()
