@@ -5,7 +5,9 @@ from utils.basic_tools import extend_array, unextend_array
 from utils.deep_tools.basic_tools import extract_features
 from utils.basic_tools import features_combination, regularize, sliding_window, CountBin
 
+
 def local_texton(feature, **kwargs):
+
     #n_clusters=n_clusters, max_iter=20, n_init=n_init
     shape = feature.shape
 
@@ -18,11 +20,13 @@ def local_texton(feature, **kwargs):
 
     return texton, cluster_model.cluster_centers_
 
+
 def local_texton_parallel(feature_all, **kwargs):
 
     return zip(*Parallel(n_jobs=-1,
                        max_nbytes='10M')(delayed(local_texton)(feature, **kwargs)
                                          for feature in feature_all))
+
 
 def global_texton(local_textons, centrodis,**kwargs):
 
@@ -47,9 +51,12 @@ def two_level_deep_texton(patches_path, data_path, ly_names, cb_settings,
                           sld_winsize=3, target_size=256, net_path=None):
     # combine settings
 
-    ft_all, names = extract_features(patches_path, data_path, if_softmax=False,
-                     ly_names=ly_names, net=None, net_path=net_path)
-
+    ft_all, names = extract_features(patches_path,
+                                     data_path,
+                                     if_softmax=False,
+                                     ly_names=ly_names,
+                                     net=None,
+                                     net_path=net_path)
 
     ft_all = features_combination(ft_all,
                                   dict(zip(ly_names, cb_settings)),

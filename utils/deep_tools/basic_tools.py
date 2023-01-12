@@ -7,6 +7,7 @@ from utils.image_process import regularize_img
 from utils.dataset import load_patches, get_from_hdf5
 from utils.models import UNet_Resnet18
 
+
 def extract_center(feature, ratio=4):
 
     if len(feature.shape) == 3:
@@ -17,9 +18,8 @@ def extract_center(feature, ratio=4):
 
         pad_h, pad_w  = int(ft_h/ratio), int(ft_w/ratio)
 
-
-
         ft = ft[pad_h: 2* pad_h, pad_w: 2*pad_w]
+
     else:
         ft = feature
 
@@ -57,6 +57,7 @@ def extract_features_train(images,  net):
         features_all.append(outputs)
 
     return np.asarray(features_all)
+
 
 def extract_features(patches_path, data_path, if_softmax = False,
                      ly_names = None, net = None, net_path = None):
