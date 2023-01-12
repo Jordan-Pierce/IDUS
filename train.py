@@ -1,4 +1,5 @@
-import torch, os
+import os
+import torch
 import numpy as np
 import torch.nn as nn
 from collections import defaultdict
@@ -8,11 +9,11 @@ from torch.utils.data import DataLoader
 from utils.dataset import IDUS_Dataset
 from utils.models.loss import MulticlassDiceLoss
 from utils.models import UNet_Resnet18
-from utils.evaluation import normalize_mutual_informaton, \
-    confusion_matrix_parallel
+from utils.evaluation import confusion_matrix_parallel
+from utils.evaluation import normalize_mutual_informaton
 from utils.deep_tools import update_pseudo_mask
 
-torch.cuda.set_device("cuda:1")
+torch.cuda.set_device("cuda:0")
 np.set_printoptions(precision=3, suppress=True)
 np.set_printoptions(linewidth=400)
 
@@ -77,7 +78,9 @@ def train_one_epoch(dataset, n_classes, max_epoch, save_path,
     # number of workers, shuffle and drop_last settings
     trainloader = DataLoader(dataset,
                              batch_size=16,
-                             num_workers=0, shuffle=True, drop_last=True)
+                             num_workers=12,
+                             shuffle=True,
+                             drop_last=True)
 
     # setup loss function using dataset pseudo-masks and specified number of
     # classes
@@ -173,7 +176,7 @@ if __name__ == '__main__':
     # Define paths for input data, model names, and the directory where the
     # trained model will be saved
     data_path = './dataset/sonar_512x512.hdf5'
-    names_path = './wavelet_deep_texton_names.npy'
+    names_path = './results/wavelet_deep_texton_names.npy'
     pseudo_path = './results/pseudo_mask.npy'
     save_path = './models/'
 
@@ -194,8 +197,7 @@ if __name__ == '__main__':
 
         # Create a new directory for the trained model from this iteration
         model_dir = os.path.join(save_path, 'iteration_' + str(i))
-        if not os.path.isdir(model_dir):
-            os.mkdir(model_dir)
+        os.makedirs(model_dir, exist_ok=True)
 
         # Train the model for one epoch, using the pseudo masks generated in
         # the previous iteration

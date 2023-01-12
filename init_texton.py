@@ -4,7 +4,6 @@ from utils.texton import two_level_deep_texton
 
 
 if __name__ == '__main__':
-
     """
     Extracts deep texton features from an image
 
@@ -23,12 +22,12 @@ if __name__ == '__main__':
     save_path = './results/deep_texton.npy'
     names_path = './results/deep_texton_names.npy'
 
-    # ?
+    # NOTE: ?
     # net_path = None
 
     # settings for extract layer features
     ly_names = ['model.encoder.layer1', 'model.encoder.layer3']
-    cb_settings =[8, 16]
+    cb_settings = [8, 16]
     
     # feature rescale size
     target_size = 128
@@ -53,5 +52,5 @@ if __name__ == '__main__':
     np.save(save_path, probs)
     np.save(names_path, np.asarray(names))
 
-    print(time()-start)
+    print(time() - start)
 

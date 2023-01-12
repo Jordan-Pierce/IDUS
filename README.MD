@@ -105,12 +105,13 @@ cd IDUS
 # Download large files
 git lfs fetch
 
-# Create the venv
-conda create -name idus python=3.7 -y
+# Create the venv, install pytorch first
+conda create --name idus python=3.7 -y
 conda activate idus
+pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
 
-# Install dependencies
-pip install -f requirements.txt
+# Install dependencies of repo
+pip install -r requirements.txt
 ```
 
 ### [Goolge Colab](https://colab.research.google.com/drive/16ArR45KoEWZjCPzAzyMR0z7ZmZ7ISg7C?usp=sharing)

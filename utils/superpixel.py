@@ -110,7 +110,8 @@ def superpixel_clustering(superpixel_features,
                           n_clusters,
                           n_jobs=-1, max_nbytes='10M', verbose = 0):
     sp_fts_ext, sp_fts_extid = extend_array(superpixel_features)
-    sp_lbs_ext = KMeans(n_clusters=n_clusters, n_jobs=-1, algorithm='full').fit_predict(sp_fts_ext)
+    sp_lbs_ext = KMeans(n_clusters=n_clusters, algorithm='full').fit_predict(sp_fts_ext)
+    # sp_lbs_ext = KMeans(n_clusters=n_clusters, n_jobs=-1, algorithm='full').fit_predict(sp_fts_ext)
     # sp_lbs_ext = BayesianGaussianMixture(n_components = n_clusters).fit_predict(sp_fts_ext)
 
     sp_lbs = unextend_array(sp_lbs_ext, sp_fts_extid)

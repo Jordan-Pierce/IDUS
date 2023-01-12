@@ -58,11 +58,16 @@ if __name__ == '__main__':
 
             # perform superpixel quatization
             sp_fts, sp_ids, segments = superpixel_quatization_parallel(
-                features, n_segments=params['n_segments'],
+                features,
+                n_segments=params['n_segments'],
                 compactness=params['compactness'],
-                seg_comp=params['seg_comp'], pre_size=params['pre_size'],
-                if_normalize=True, if_regularize=True,
-                max_bytes='10M', verbose=10, n_jobs=-1,
+                seg_comp=params['seg_comp'],
+                pre_size=params['pre_size'],
+                if_normalize=True,
+                if_regularize=True,
+                max_bytes='10M',
+                verbose=10,
+                n_jobs=-1,
                 if_decomposed=if_decomposed)
 
             # perform superpixel clustering for segmentation
@@ -77,6 +82,8 @@ if __name__ == '__main__':
             if 'mask_path' in params:
                 np.save(params['mask_path'], preds)
 
-        except:
-            # print failed iteration number
+        except Exception as e:
+            print(e)
             print('Number:', i + 1, 'failed!')
+
+    print("Done.")
