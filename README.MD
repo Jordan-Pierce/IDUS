@@ -28,12 +28,6 @@ Dataset Information
 ### Dataset Title:
 [Synthetic Aperture Sonar Seabed Environment Dataset (SASSED)](https://data.mendeley.com/datasets/s5j5gzr2vc)
 
-### Date of data collection/creation:
-Not released.
-
-### Geographic location of data collection:
-Not released.
-
 ### Funders and sponsors of data collection:
 Naval Sea Systems Command (NSWC) Panama City Division, Panama City, Florida, USA
 
@@ -52,7 +46,7 @@ Data & File Overview
 
 ### File list:
 
-In idus_code.zip, the following codes are shared. 
+In [idus_code.zip](https://scholarsphere.psu.edu/resources/ff521a5e-58e8-48b2-a9c9-5012800b62ab), the following codes are shared. 
 1) `init_texton.py` - Code for generating textons.
 2) `init_wavelet.py` - Code for generating wavelet features.
 3) `init_combine.py` - Code for concatenating wavelet features and textons.
@@ -103,7 +97,7 @@ The pathnames at the top of the main functions need to be revised appropriately 
 
 ```angular2html
 # Clone repo from source
-git clone https://github.com/isaacgerg/synthetic_aperture_sonar_autofocus.git
+git clone https://github.com/Jordan-Pierce/IDUS.git
 
 # Chnage directories
 cd IDUS
