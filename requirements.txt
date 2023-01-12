@@ -1,0 +1,8 @@
+numpy
+joblib
+scikit-learn
+opencv-python
+segmentation-models-pytorch
+h5py
+pandas
+scikit-image

@@ -20,6 +20,20 @@ best_m = 0
 
 # Define function to re-sort confusion matrix
 def re_sort(cfm, arr, columns):
+    """
+    Takes in three parameters: a confusion matrix (cfm), an array (arr),
+    and a list of columns (columns). It is used to calculate the best mean of
+    the diagonal of the confusion matrix using all possible combinations of the
+    elements in the array as indices.
+
+    It check if the array is of length 7 or more, then it iterates over the
+    columns and appends the current column to the array, calls the function
+    again with the updated array and columns (excluding the current column),
+    and then pops the column from the array. This allows the function to
+    explore all possible combinations of columns in the array and updates
+    global variable of best_m and best_cfm with the best mean and corresponding
+     confusion matrix.
+    """
 
     # Check if array is at least length 7
     if len(arr) >= 7:

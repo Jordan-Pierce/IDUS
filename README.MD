@@ -1,4 +1,6 @@
-*This README.md file was generated on 2022/04/08 by Yung-Chen Sun*
+*This README.md file was first generated on 2022/04/08 by Yung-Chen Sun and 
+subsequently modified by Jordan Pierce* 
+
 
 General Information
 ------------------
@@ -6,9 +8,9 @@ General Information
 *Data and Code for "Iterative, Deep Synthetic Aperture Sonar Image Segmentation"*
 
 ### Author Information:
-Yung-Chen Sun (yzs5463@psu.edu)
-Isaac D. Gerg
-Vishal Monga
+- Yung-Chen Sun (yzs5463@psu.edu)
+- Isaac D. Gerg
+- Vishal Monga
 
 Sharing/Access Information
 --------------------------
@@ -24,7 +26,7 @@ https://ieeexplore.ieee.org/document/9745161
 Dataset Information
 ------------------
 ### Dataset Title:
-Synthetic Aperture Sonar Seabed Environment Dataset (SASSED)
+[Synthetic Aperture Sonar Seabed Environment Dataset (SASSED)](https://data.mendeley.com/datasets/s5j5gzr2vc)
 
 ### Date of data collection/creation:
 Not released.
@@ -51,17 +53,17 @@ Data & File Overview
 ### File list:
 
 In idus_code.zip, the following codes are shared. 
-1) init_texton.py - Code for generating textons.
-2) init_wavelet.py - Code for generating wavelet features.
-3) init_combine.py - Code for concatenating wavelet features and textons.
-4) init_pseudo_mask.py - Code for generating initialization pseudo masks used for training IDUS.
-5) train.py - Code for training IDUS. The backbone model is U-Net and the network is trained in an unsupervised fashion.
-6) test.py - Code for testing IDUS via confusion matrix. Since the unsupervised predicted class and ground truths might be different, we re-sort the columns of the confusion matrix and use the sort that has maximum mean diagonal elements as the final result.
+1) `init_texton.py` - Code for generating textons.
+2) `init_wavelet.py` - Code for generating wavelet features.
+3) `init_combine.py` - Code for concatenating wavelet features and textons.
+4) `init_pseudo_mask.py` - Code for generating initialization pseudo masks used for training IDUS.
+5) `train.py` - Code for training IDUS. The backbone model is U-Net and the network is trained in an unsupervised fashion.
+6) `test.py` - Code for testing IDUS via confusion matrix. Since the unsupervised predicted class and ground truths might be different, we re-sort the columns of the confusion matrix and use the sort that has maximum mean diagonal elements as the final result.
 
 ### Additional notes:
 
-The network model we trained is located in /models/idus.pth.
-We save the confusion matrix of IDUS we reported in the paper in /results/idus_cfm.npy, using /results/show_confusion_matrix.py can print the results.
+The network model we trained is located in `/models/idus.pth`.
+We save the confusion matrix of IDUS we reported in the paper in `/results/idus_cfm.npy`, using `/results/show_confusion_matrix.py` can print the results.
 
 Methodological Information
 --------------------------
@@ -89,7 +91,35 @@ image2, 0, 0 ,512, 512
 The hdf5 file and CSV file we used are shared in the dataset.zip file.
 
 To train the IDUS, need to perform the .py files in the following order:
-init_texton.py->init_wavelet.py->init_combine.py->init_pseudo_mask.py->train.py
+- `init_texton.py`
+- `init_wavelet.py`
+- `init_combine.py`
+- `init_pseudo_mask.py`
+- `train.py` 
+
 The pathnames at the top of the main functions need to be revised appropriately so that to use the files needed for the .py files.
 
+### Setting up
+
+```angular2html
+# Clone repo from source
+git clone https://github.com/isaacgerg/synthetic_aperture_sonar_autofocus.git
+
+# Chnage directories
+cd IDUS
+
+# Download large files
+git lfs fetch
+
+# Create the venv
+conda create -name idus python=3.7 -y
+conda activate idus
+
+# Install dependencies
+pip install -f requirements.txt
+```
+
 ### [Goolge Colab](https://colab.research.google.com/drive/16ArR45KoEWZjCPzAzyMR0z7ZmZ7ISg7C?usp=sharing)
+
+
+
